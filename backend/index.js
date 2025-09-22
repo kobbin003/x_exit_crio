@@ -1,0 +1,35 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const { connect } = require("mongoose");
+const taskRoutes = require("./routes");
+// const { seedRolesAndPermissions } = require("./utils/seed");
+const app = express();
+const PORT = process.env.PORT;
+const DB_URI = process.env.MONGODB_URL;
+
+connect(DB_URI)
+	.then(() => {
+		console.log("DB Connected!");
+		// seedDatabase();
+		// task.seedDb();
+		// seedRolesAndPermissions().then(() =>
+		// 	console.log("roles and permissions seeded..")
+		// );
+		app.listen(PORT, () => {
+			console.log(`Backend listening on ${PORT}`);
+		});
+	})
+	.catch((error) => console.log("Error in connecting DB", error));
+
+app.use(cors());
+app.use(express.json());
+
+// logger middleware...
+app.use((req, res, next) => {
+	console.log(`${req.method} call at ${req.url} with body `);
+	console.log(req.body);
+	next();
+});
+
+app.use("/api", taskRoutes);
