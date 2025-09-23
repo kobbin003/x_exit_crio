@@ -6,7 +6,6 @@ async function seedRolesAndPermissions() {
 		// Empty existing data
 		await Role.deleteMany({});
 		await permissionModel.deleteMany({});
-		console.log("Cleared existing roles and permissions data");
 
 		// Create permissions
 		const permissionData = [
@@ -40,7 +39,6 @@ async function seedRolesAndPermissions() {
 		];
 
 		const permissions = await permissionModel.insertMany(permissionData);
-		console.log("Permissions created successfully");
 
 		// Create a map for easy lookup
 		const permissionMap = {};
@@ -68,8 +66,6 @@ async function seedRolesAndPermissions() {
 				],
 			},
 		]);
-		console.log("Roles created successfully");
-		console.log("Roles and permissions seeded successfully!");
 	} catch (error) {
 		console.error("Error seeding roles and permissions:", error);
 	}

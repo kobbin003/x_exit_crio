@@ -30,8 +30,10 @@ app.use(passport.initialize());
 
 // logger middleware...
 app.use((req, res, next) => {
-	console.log(`${req.method} call at ${req.url} with body `);
-	console.log(req.body);
+	console.log(
+		`${req.method} call at ${req.url} ${req.body ? "with" : "without"} body `
+	);
+	// console.log(req.body);
 	next();
 });
 

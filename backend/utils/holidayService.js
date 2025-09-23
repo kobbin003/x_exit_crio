@@ -6,7 +6,6 @@ const isHoliday = async (date, country = "US") => {
 		const month = date.getMonth() + 1; // JavaScript months are 0-indexed
 		const day = date.getDate();
 
-		console.log(year, "-", month, "-", day);
 		const apiKey = process.env.CALENDARIFIC_API_KEY;
 		const url = `https://calendarific.com/api/v2/holidays`;
 

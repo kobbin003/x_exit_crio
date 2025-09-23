@@ -56,7 +56,28 @@ const concludeResignation = async (req, res) => {
 	}
 };
 
+const getExitResponses = async (req, res) => {
+	try {
+		const exitResponses = await adminService.getAllExitResponses();
+
+		const formattedResponses = exitResponses.map((exitInterview) => ({
+			employeeId: exitInterview.employee._id,
+			responses: exitInterview.responses.map((response) => ({
+				questionText: response.question,
+				response: response.answer,
+			})),
+		}));
+
+		res.status(200).json({
+			data: formattedResponses,
+		});
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
+
 module.exports = {
 	getAllResignations,
 	concludeResignation,
+	getExitResponses,
 };

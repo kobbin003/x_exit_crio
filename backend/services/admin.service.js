@@ -1,4 +1,5 @@
 const Resignation = require("../models/resignation.model");
+const ExitInterview = require("../models/exitInterview.model");
 
 const getAllResignations = async () => {
 	try {
@@ -64,7 +65,20 @@ const concludeResignation = async ({
 	}
 };
 
+const getAllExitResponses = async () => {
+	try {
+		const exitInterviews = await ExitInterview.find({ status: "completed" })
+			.populate("employee", "_id username")
+			.sort({ completed_at: -1 }); // Sort by completion date, newest first
+
+		return exitInterviews;
+	} catch (error) {
+		throw new Error("Failed to fetch exit responses: " + error.message);
+	}
+};
+
 module.exports = {
 	getAllResignations,
 	concludeResignation,
+	getAllExitResponses,
 };

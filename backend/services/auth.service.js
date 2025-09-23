@@ -28,7 +28,6 @@ const registerUser = async (username, password, role) => {
 const loginUser = async (username, password) => {
 	const user = await User.findOne({ username }).populate("role");
 
-	// console.log("login-user: ", user);
 	if (!user) {
 		throw new Error("Invalid credentials");
 	}

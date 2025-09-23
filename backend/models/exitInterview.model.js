@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const exitInterviewSchema = new mongoose.Schema({
-	resignation: { type: ObjectId, ref: "Resignation", required: true },
-	employee: { type: ObjectId, ref: "User", required: true },
+	resignation: { type: mongoose.Schema.Types.ObjectId, ref: "Resignation", required: true },
+	employee: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 	responses: [
 		{
 			question: { type: String, required: true },
@@ -15,6 +15,8 @@ const exitInterviewSchema = new mongoose.Schema({
 		enum: ["pending", "completed"],
 		default: "pending",
 	},
+}, {
+	timestamps: true
 });
 
 const exitInterviewModel = mongoose.model("ExitInterview", exitInterviewSchema);

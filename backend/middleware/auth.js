@@ -19,7 +19,6 @@ passport.use(
 					model: Permission,
 				},
 			});
-			// console.log("auth-user: ", user);
 			if (user) {
 				return done(null, user);
 			} else {
