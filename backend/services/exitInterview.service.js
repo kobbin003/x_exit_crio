@@ -31,7 +31,7 @@ const submitExitInterviewResponses = async (userId, responses) => {
 		}
 
 		// Validate that all required questions are answered
-		const questionTexts = responses.map((r) => r.question);
+		const questionTexts = responses.map((r) => r.questionText);
 
 		const missingQuestions = EXIT_INTERVIEW_QUESTIONS.filter(
 			(q) => !questionTexts.includes(q)
@@ -58,20 +58,20 @@ const submitExitInterviewResponses = async (userId, responses) => {
 
 		// Validate responses format
 		for (const response of responses) {
-			if (!response.question || !response.answer) {
+			if (!response.questionText || !response.response) {
 				throw new Error(
 					"Each response must have questionText and response fields"
 				);
 			}
 
 			if (
-				typeof response.question !== "string" ||
-				typeof response.answer !== "string"
+				typeof response.questionText !== "string" ||
+				typeof response.response !== "string"
 			) {
 				throw new Error("questionText and response must be strings");
 			}
 
-			if (response.answer.trim().length === 0) {
+			if (response.response.trim().length === 0) {
 				throw new Error(
 					`Response cannot be empty for question: ${response.question}`
 				);
@@ -80,8 +80,8 @@ const submitExitInterviewResponses = async (userId, responses) => {
 
 		// Prepare responses for storage
 		const formattedResponses = responses.map((r) => ({
-			question: r.question,
-			answer: r.answer.trim(),
+			question: r.questionText,
+			answer: r.response.trim(),
 		}));
 
 		// Create or update exit interview
