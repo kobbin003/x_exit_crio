@@ -7,7 +7,7 @@ const resignationSchema = new mongoose.Schema(
 			ref: "User",
 			required: true,
 		},
-		reason: { type: String, required: true },
+		reason: { type: String },
 		intended_last_working_day: { type: Date, required: true },
 		status: {
 			type: String,
