@@ -5,7 +5,7 @@ const User = require("../models/user.model");
 const Permission = require("../models/permission.model"); // Add this line
 
 const jwtOptions = {
-	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+	jwtFromRequest: ExtractJwt.fromHeader("authorization"),
 	secretOrKey: process.env.JWT_SECRET,
 };
 
