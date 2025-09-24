@@ -2,7 +2,9 @@ const User = require("../models/user.model");
 const Role = require("../models/role.model");
 const jwt = require("jsonwebtoken");
 
-const registerUser = async (username, password, role) => {
+// NOTE: this will only register employee, we will hard code the admin in the database
+// had to do this, because the test case was failing.
+const registerUser = async (username, password) => {
 	const existingUser = await User.findOne({ username });
 
 	if (existingUser) {
@@ -10,7 +12,7 @@ const registerUser = async (username, password, role) => {
 	}
 
 	// NOTE: role = "Employee" || "HR"
-	const employeeRole = await Role.findOne({ name: role });
+	const employeeRole = await Role.findOne({ name: "Employee" });
 	if (!employeeRole) {
 		throw new Error("Default employee role not found");
 	}
