@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const authRouter = require("./auth.route.js");
-const userRouter = require("./user.router.js");
+const userRouter = require("./user.route.js");
 const adminRouter = require("./admin.route.js");
 
 router.get("/", (req, res) => res.json({ msg: "hello" }));

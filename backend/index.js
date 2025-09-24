@@ -6,6 +6,7 @@ const { connect } = require("mongoose");
 const taskRoutes = require("./routes");
 // const { seedRolesAndPermissions } = require("./utils/seed");
 require("./middleware/auth"); // Initialize passport strategies
+
 const app = express();
 const PORT = process.env.PORT;
 const DB_URI = process.env.MONGODB_URL;
@@ -13,8 +14,7 @@ const DB_URI = process.env.MONGODB_URL;
 connect(DB_URI)
 	.then(() => {
 		console.log("DB Connected!");
-		// seedDatabase();
-		// task.seedDb();
+		// NOTE: seedRolesAndPermissions is to be run only once. since the data of these models are constant.
 		// seedRolesAndPermissions().then(() =>
 		// 	console.log("roles and permissions seeded..")
 		// );
