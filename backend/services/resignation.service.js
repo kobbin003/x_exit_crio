@@ -1,7 +1,7 @@
 const Resignation = require("../models/resignation.model");
 const { isHoliday } = require("../utils/holidayService");
 
-const submitResignation = async (userId, lwd, reason) => {
+const submitResignation = async (userId, lwd, reason = "") => {
 	// Check if user already has a pending resignation
 	const existingResignation = await Resignation.findOne({
 		employee: userId,
